@@ -15,7 +15,9 @@ function App() {
     { name: "길학" },
     { name: "유동" },
   ];
+
   const [personWork, setPersonWork] = useState([]);
+  console.log(personWork);
   const [realMen, setRealMen] = useState([]);
 
   const daysOfWeek = ["일", "월", "화", "수", "목", "금", "토"];
