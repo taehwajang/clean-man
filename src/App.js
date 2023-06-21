@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import styled from "styled-components";
 function App() {
   const men = [
@@ -15,7 +15,10 @@ function App() {
     { name: "길학" },
     { name: "유동" },
   ];
+
   const [personWork, setPersonWork] = useState([]);
+  const [clickNumber, setClickNumber] = useState(0);
+
   const [realMen, setRealMen] = useState([]);
 
   const daysOfWeek = ["일", "월", "화", "수", "목", "금", "토"];
@@ -32,13 +35,16 @@ function App() {
           onChange={(e) => {
             if (e.currentTarget.checked) {
               setPersonWork(men.map((item) => item.name));
+              setClickNumber(0);
             } else {
               setPersonWork([]);
+              setClickNumber(0);
             }
           }}
         />
         <ListItem>전체 선택</ListItem>
       </AllCheck>
+      <CountWrapper>주번 고르기 돌린 횟수: {clickNumber} 회 </CountWrapper>
       <PersonWorkList>
         {men.map((i, index) => {
           return (
@@ -49,9 +55,11 @@ function App() {
                 onChange={(e) => {
                   if (e.currentTarget.checked) {
                     setPersonWork((personWork) => [...personWork, i.name]);
+                    setClickNumber(0);
                   }
                   if (e.currentTarget.checked === false) {
                     setPersonWork(personWork.filter((v) => v !== i.name));
+                    setClickNumber(0);
                   }
                 }}
               />
@@ -69,8 +77,8 @@ function App() {
         onClick={() => {
           let one = Math.floor(Math.random() * personWork.length);
           let two = Math.floor(Math.random() * personWork.length);
-
           if (one !== two) setRealMen([personWork[one], personWork[two]]);
+          setClickNumber((prev) => prev + 1);
         }}
       >
         주번 고르기!~
@@ -87,6 +95,10 @@ function App() {
   );
 }
 
+const CountWrapper = styled.div`
+  display: flex;
+  margin-bottom: 12px;
+`;
 const CleanDayText = styled.div`
   display: flex;
   justify-content: center;
