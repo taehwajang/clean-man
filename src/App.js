@@ -1,4 +1,4 @@
-import { useEffect, useState } from "react";
+import { useState } from "react";
 import styled from "styled-components";
 function App() {
   const men = [
@@ -14,6 +14,9 @@ function App() {
     { name: "승렬" },
     { name: "길학" },
     { name: "유동" },
+    { name: "태원" },
+    { name: "윤호" },
+    { name: "혜령" },
   ];
 
   const [personWork, setPersonWork] = useState([]);
@@ -44,7 +47,6 @@ function App() {
         />
         <ListItem>전체 선택</ListItem>
       </AllCheck>
-      <CountWrapper>주번 고르기 돌린 횟수: {clickNumber} 회 </CountWrapper>
       <PersonWorkList>
         {men.map((i, index) => {
           return (
@@ -75,10 +77,13 @@ function App() {
       </PersonWorkListItem>
       <Btn
         onClick={() => {
-          let one = Math.floor(Math.random() * personWork.length);
-          let two = Math.floor(Math.random() * personWork.length);
-          if (one !== two) setRealMen([personWork[one], personWork[two]]);
-          setClickNumber((prev) => prev + 1);
+          const one = Math.floor(Math.random() * personWork.length);
+          const two = Math.floor(Math.random() * personWork.length);
+          if (dayOfWeek === "월") {
+            if (one !== two) setRealMen([personWork[one], personWork[two]]);
+          } else {
+            if (one !== two) setRealMen([personWork[one]]);
+          }
         }}
       >
         주번 고르기!~
