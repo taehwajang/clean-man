@@ -20,7 +20,6 @@ function App() {
   ];
 
   const [personWork, setPersonWork] = useState([]);
-  const [clickNumber, setClickNumber] = useState(0);
 
   const [realMen, setRealMen] = useState([]);
 
@@ -38,10 +37,8 @@ function App() {
           onChange={(e) => {
             if (e.currentTarget.checked) {
               setPersonWork(men.map((item) => item.name));
-              setClickNumber(0);
             } else {
               setPersonWork([]);
-              setClickNumber(0);
             }
           }}
         />
@@ -57,11 +54,9 @@ function App() {
                 onChange={(e) => {
                   if (e.currentTarget.checked) {
                     setPersonWork((personWork) => [...personWork, i.name]);
-                    setClickNumber(0);
                   }
                   if (e.currentTarget.checked === false) {
                     setPersonWork(personWork.filter((v) => v !== i.name));
-                    setClickNumber(0);
                   }
                 }}
               />
@@ -100,10 +95,6 @@ function App() {
   );
 }
 
-const CountWrapper = styled.div`
-  display: flex;
-  margin-bottom: 12px;
-`;
 const CleanDayText = styled.div`
   display: flex;
   justify-content: center;
